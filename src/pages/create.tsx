@@ -1,9 +1,9 @@
-import { ItemCardCollection } from "@/ui-components";
-import NavBar from "@/ui-components/NavBar";
+import DetailNavBar from "@/ui-components/DetailNavBar";
+import TodoCreateForm from "@/ui-components/TodoCreateForm";
 import { Authenticator, Flex } from "@aws-amplify/ui-react";
 import Head from "next/head";
 
-export default function Home() {
+export default function Create() {
   return (
     <>
       <Head>
@@ -22,14 +22,17 @@ export default function Home() {
 const Page = () => {
   return (
     <Flex direction="column">
-      <NavBar
+      <DetailNavBar
         overrides={{
-          NavBar: {
+          DetailNavBar: {
             width: "100%",
+          },
+          Heading: {
+            children: "Create Todo",
           },
         }}
       />
-      <ItemCardCollection />
+      <TodoCreateForm />
     </Flex>
   );
 };

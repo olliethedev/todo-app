@@ -1,9 +1,11 @@
-import { ItemCardCollection } from "@/ui-components";
-import NavBar from "@/ui-components/NavBar";
+import { TodoUpdateForm } from "@/ui-components";
+import DetailNavBar from "@/ui-components/DetailNavBar";
+import TodoCreateForm from "@/ui-components/TodoCreateForm";
 import { Authenticator, Flex } from "@aws-amplify/ui-react";
 import Head from "next/head";
+import { useRouter } from "next/router";
 
-export default function Home() {
+export default function Update() {
   return (
     <>
       <Head>
@@ -20,16 +22,20 @@ export default function Home() {
 }
 
 const Page = () => {
+  const id = useRouter().query.id;
   return (
     <Flex direction="column">
-      <NavBar
+      <DetailNavBar
         overrides={{
-          NavBar: {
+          DetailNavBar: {
             width: "100%",
+          },
+          Heading: {
+            children: "Updage Todo",
           },
         }}
       />
-      <ItemCardCollection />
+      <TodoUpdateForm id={id as string} />
     </Flex>
   );
 };

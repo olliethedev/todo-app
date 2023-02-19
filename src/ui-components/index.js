@@ -4,6 +4,11 @@
  * Any changes to this file will be overwritten when running amplify pull. *
  **************************************************************************/
 
+export { default as NavBar } from "./NavBar";
+export { default as DetailNavBar } from "./DetailNavBar";
+export { default as MyIcon } from "./MyIcon";
+export { default as ItemCard } from "./ItemCard";
+export { default as ItemCardCollection } from "./SecondItemCardCollection";
 export { default as studioTheme } from "./studioTheme";
 export { default as TodoCreateForm } from "./TodoCreateForm";
 export { default as TodoUpdateForm } from "./TodoUpdateForm";
