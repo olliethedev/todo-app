@@ -10,27 +10,12 @@ import { Todo } from "../models";
 import {
   getOverrideProps,
   useDataStoreDeleteAction,
-  useDataStoreUpdateAction,
   useNavigateAction,
-  useStateMutationAction,
 } from "@aws-amplify/ui-react/internal";
 import { schema } from "../models/schema";
-import { useEffect } from "react";
-import { Button, CheckboxField, Flex, Text } from "@aws-amplify/ui-react";
+import { Button, Flex, SwitchField, Text } from "@aws-amplify/ui-react";
 export default function ItemCard(props) {
   const { todo, overrides, ...rest } = props;
-  const [checkboxFieldChecked, setCheckboxFieldChecked] =
-    useStateMutationAction(false);
-  const checkboxFieldOnChange = useDataStoreUpdateAction({
-    fields: {
-      completed: checkboxFieldChecked,
-      description: "todo.description",
-      name: "todo.name",
-    },
-    id: todo?.id,
-    model: Todo,
-    schema: schema,
-  });
   const textContentOnClick = useNavigateAction({
     type: "url",
     url: `${"/update/"}${todo?.id}`,
@@ -40,14 +25,6 @@ export default function ItemCard(props) {
     model: Todo,
     schema: schema,
   });
-  useEffect(() => {
-    if (
-      checkboxFieldChecked === false &&
-      todo !== undefined &&
-      todo?.completed !== undefined
-    )
-      setCheckboxFieldChecked(todo?.completed);
-  }, [todo]);
   return (
     <Flex
       gap="16px"
@@ -57,8 +34,9 @@ export default function ItemCard(props) {
       justifyContent="flex-start"
       alignItems="flex-start"
       position="relative"
+      borderRadius="8px"
       padding="16px 16px 16px 16px"
-      backgroundColor="rgba(255,255,255,1)"
+      backgroundColor="rgba(250,250,250,1)"
       {...getOverrideProps(overrides, "ItemCard")}
       {...rest}
     >
@@ -75,20 +53,15 @@ export default function ItemCard(props) {
         padding="0px 0px 0px 0px"
         {...getOverrideProps(overrides, "Content")}
       >
-        <CheckboxField
+        <SwitchField
           shrink="0"
           label=""
           size="large"
           defaultChecked={false}
           isDisabled={false}
           labelPosition="end"
-          checked={checkboxFieldChecked}
-          value={todo?.completed}
-          onChange={() => {
-            checkboxFieldOnChange();
-          }}
-          {...getOverrideProps(overrides, "CheckboxField")}
-        ></CheckboxField>
+          {...getOverrideProps(overrides, "SwitchField")}
+        ></SwitchField>
         <Flex
           gap="0"
           direction="column"
@@ -125,11 +98,6 @@ export default function ItemCard(props) {
             position="relative"
             padding="0px 0px 0px 0px"
             whiteSpace="pre-wrap"
-            textDecoration={
-              todo?.completed && todo?.completed == true
-                ? "line-through"
-                : "none"
-            }
             children={todo?.name}
             {...getOverrideProps(overrides, "Name")}
           ></Text>

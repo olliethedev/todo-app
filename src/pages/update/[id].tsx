@@ -1,18 +1,19 @@
 /* eslint-disable @next/next/no-img-element */
+
+import { useCallback, useEffect, useState } from "react";
+import Head from "next/head";
+import { useRouter } from "next/router";
+import { DataStore, Storage } from "aws-amplify";
 import { Todo } from "@/models";
-import { TodoUpdateForm } from "@/ui-components";
-import DetailNavBar from "@/ui-components/DetailNavBar";
 import {
   Authenticator,
   Flex,
   FileUploader,
   Heading,
+  Divider,
+  Text,
 } from "@aws-amplify/ui-react";
-import { DataStore, Storage } from "aws-amplify";
-import Head from "next/head";
-import { useRouter } from "next/router";
-import { useStorageURL } from "@aws-amplify/ui-react/internal";
-import { useEffect, useState } from "react";
+import { PageContent, TodoUpdateForm, DetailNavBar } from "@/ui-components";
 
 export default function Update() {
   return (
@@ -42,10 +43,38 @@ const Page = () => {
           Heading: {
             children: "Updage Todo",
           },
+          Content: {
+            maxWidth: "1440px",
+            margin: "0 auto",
+          },
         }}
       />
-      <TodoUpdateForm id={id as string} />
-      <ImageLayout id={id as string} />
+      <PageContent
+        overrides={{
+          PageContent: {
+            width: "100%",
+            maxWidth: "500px",
+            margin: "0 auto",
+            children: (
+              <>
+                <TodoUpdateForm
+                  id={id as string}
+                  overrides={{
+                    TodoUpdateForm: {
+                      width: "100%",
+                    },
+                  }}
+                  onSuccess={() => {
+                    window.location.href = "/";
+                  }}
+                />
+
+                {id && <ImageLayout id={id as string} />}
+              </>
+            ),
+          },
+        }}
+      />
     </Flex>
   );
 };
@@ -58,37 +87,53 @@ const ImageLayout = ({ id }: { id: string }) => {
       setTodo(todo);
     };
     call();
-  }, [id]);
-  const onSuccess = ({ key }: { key: string }) => {
-    const call = async () => {
-      if (todo) {
-        const updatedTodo = await DataStore.save(
-          Todo.copyOf(todo, (updated) => {
-            updated.image = key;
-          })
-        );
-        setTodo(updatedTodo);
-      }
-    };
-    call();
-  };
+  }, []);
+
+  const onSuccess = useCallback(
+    ({ key }: { key: string }) => {
+      const call = async () => {
+        if (todo) {
+          const updatedTodo = await DataStore.save(
+            Todo.copyOf(todo, (updated) => {
+              updated.image = key;
+            })
+          );
+          setTodo(updatedTodo);
+        }
+      };
+      call();
+    },
+    [todo]
+  );
 
   return (
-    <Flex direction="column">
-      <Heading level={3}>Upload Image</Heading>
-      <FileUploader
-        acceptedFileTypes={["image/*"]}
-        hasMultipleFiles={false}
-        maxSize={500000}
-        accessLevel="private"
-        onSuccess={onSuccess}
-      />
-      {todo?.image && <S3Image imageKey={todo.image} />}
+    <Flex direction="column" grow={1} width="100%">
+      {todo && (
+        <>
+          <Divider label="OR" />
+          <Heading level={3} textAlign="center">
+            Upload Image
+          </Heading>
+          <FileUploader
+            acceptedFileTypes={["image/*"]}
+            hasMultipleFiles={false}
+            maxSize={500000}
+            accessLevel="private"
+            onSuccess={onSuccess}
+          />
+          {todo?.image ? (
+            <S3Image imageKey={todo.image} />
+          ) : (
+            <Text>No Image</Text>
+          )}
+        </>
+      )}
     </Flex>
   );
 };
 
 const S3Image = ({ imageKey }: { imageKey: string }) => {
+  console.log("imageKey", imageKey);
   const [url, setUrl] = useState<string>();
   useEffect(() => {
     const call = async () => {

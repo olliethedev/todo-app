@@ -1,7 +1,6 @@
-import DetailNavBar from "@/ui-components/DetailNavBar";
-import TodoCreateForm from "@/ui-components/TodoCreateForm";
-import { Authenticator, Flex } from "@aws-amplify/ui-react";
 import Head from "next/head";
+import { Authenticator, Flex } from "@aws-amplify/ui-react";
+import { DetailNavBar, TodoCreateForm, PageContent } from "@/ui-components";
 
 export default function Create() {
   return (
@@ -30,9 +29,33 @@ const Page = () => {
           Heading: {
             children: "Create Todo",
           },
+          Content: {
+            maxWidth: "1440px",
+            margin: "0 auto",
+          },
         }}
       />
-      <TodoCreateForm />
+      <PageContent
+        overrides={{
+          PageContent: {
+            width: "100%",
+            maxWidth: "500px",
+            margin: "0 auto",
+            children: (
+              <TodoCreateForm
+                overrides={{
+                  TodoCreateForm: {
+                    width: "100%",
+                  },
+                }}
+                onSuccess={() => {
+                  window.location.href = "/";
+                }}
+              />
+            ),
+          },
+        }}
+      />
     </Flex>
   );
 };

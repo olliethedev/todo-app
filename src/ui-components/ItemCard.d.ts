@@ -7,12 +7,12 @@
 import * as React from "react";
 import { Todo } from "../models";
 import { EscapeHatchProps } from "@aws-amplify/ui-react/internal";
-import { ButtonProps, CheckboxFieldProps, FlexProps, TextProps } from "@aws-amplify/ui-react";
+import { ButtonProps, FlexProps, SwitchFieldProps, TextProps } from "@aws-amplify/ui-react";
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
 export declare type ItemCardOverridesProps = {
     ItemCard?: PrimitiveOverrideProps<FlexProps>;
     Content?: PrimitiveOverrideProps<FlexProps>;
-    CheckboxField?: PrimitiveOverrideProps<CheckboxFieldProps>;
+    SwitchField?: PrimitiveOverrideProps<SwitchFieldProps>;
     TextContent?: PrimitiveOverrideProps<FlexProps>;
     Name?: PrimitiveOverrideProps<TextProps>;
     Description?: PrimitiveOverrideProps<TextProps>;

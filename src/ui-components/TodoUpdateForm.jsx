@@ -11,6 +11,7 @@ import {
   Flex,
   Grid,
   SwitchField,
+  TextAreaField,
   TextField,
 } from "@aws-amplify/ui-react";
 import { getOverrideProps } from "@aws-amplify/ui-react/internal";
@@ -163,7 +164,7 @@ export default function TodoUpdateForm(props) {
         hasError={errors.name?.hasError}
         {...getOverrideProps(overrides, "name")}
       ></TextField>
-      <TextField
+      <TextAreaField
         label="Description"
         isRequired={false}
         isReadOnly={false}
@@ -188,7 +189,7 @@ export default function TodoUpdateForm(props) {
         errorMessage={errors.description?.errorMessage}
         hasError={errors.description?.hasError}
         {...getOverrideProps(overrides, "description")}
-      ></TextField>
+      ></TextAreaField>
       <SwitchField
         label="Completed"
         defaultChecked={false}
@@ -234,7 +235,7 @@ export default function TodoUpdateForm(props) {
           {...getOverrideProps(overrides, "RightAlignCTASubFlex")}
         >
           <Button
-            children="Submit"
+            children="Save"
             type="submit"
             variation="primary"
             isDisabled={

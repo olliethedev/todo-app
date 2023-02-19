@@ -6,10 +6,12 @@
 
 import * as React from "react";
 import { EscapeHatchProps } from "@aws-amplify/ui-react/internal";
-import { ButtonProps, FlexProps, HeadingProps } from "@aws-amplify/ui-react";
+import { ButtonProps, FlexProps, HeadingProps, ViewProps } from "@aws-amplify/ui-react";
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
 export declare type DetailNavBarOverridesProps = {
     DetailNavBar?: PrimitiveOverrideProps<FlexProps>;
+    Content?: PrimitiveOverrideProps<FlexProps>;
+    "Frame 1"?: PrimitiveOverrideProps<ViewProps>;
     Heading?: PrimitiveOverrideProps<HeadingProps>;
     Button?: PrimitiveOverrideProps<ButtonProps>;
 } & EscapeHatchProps;

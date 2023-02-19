@@ -1,9 +1,29 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:slnt,wght@-10..0,100..900&display=swap');
 
+body{
+  padding: 0px;
+  margin: 0px;
+}
+
 .amplify-collection{
   width: 100%!important;
 }
 
 .card-text:hover{
   cursor: pointer;
+}
+
+.amplify-input{
+  background-color: var(--amplify-colors-background-secondary)!important;
+}
+.amplify-field-group__outer-end{
+  background-color: var(--amplify-colors-background-secondary)!important;
+  border-top-right-radius: var(--amplify-components-fieldcontrol-border-radius)!important;
+  border-bottom-right-radius: var(--amplify-components-fieldcontrol-border-radius)!important;
+}
+.amplify-searchfield__search{
+  background-color: transparent!important;
+}
+.amplify-field-group__outer-end .amplify-field-group__control:hover{
+  border-color: var(--amplify-components-button-hover-border-color)!important;
 }

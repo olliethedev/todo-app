@@ -1,8 +1,13 @@
-import { Todo } from "@/models";
-import { ItemCardCollection, PageContent } from "@/ui-components";
-import NavBar from "@/ui-components/NavBar";
-import { Authenticator, Flex } from "@aws-amplify/ui-react";
 import Head from "next/head";
+import { DataStore } from "aws-amplify";
+import { Authenticator, Flex } from "@aws-amplify/ui-react";
+import { Todo } from "@/models";
+import {
+  EmptyListPlaceholder,
+  ItemCardCollection,
+  PageContent,
+  NavBar,
+} from "@/ui-components";
 
 export default function Home() {
   return (
@@ -28,23 +33,41 @@ const Page = () => {
           NavBar: {
             width: "100%",
           },
+          Content: {
+            maxWidth: "1440px",
+            margin: "0 auto",
+          },
         }}
       />
       <PageContent
         overrides={{
           PageContent: {
             width: "100%",
-            maxWidth: "1440px",
+            maxWidth: "500px",
             margin: "0 auto",
             children: (
               <ItemCardCollection
-                overrideItems={() => ({
+                gap={10}
+                overrides={{
+                  ItemCardCollection: {
+                    searchNoResultsFound: <EmptyListPlaceholder width="100%" />,
+                  },
+                }}
+                overrideItems={({ item }: { item: Todo }) => ({
                   width: "100%",
-                  maxWidth: "500px",
-                  margin: "0 auto",
                   overrides: {
                     TextContent: {
                       className: "card-text",
+                    },
+                    SwitchField: {
+                      defaultChecked: item.completed ?? false,
+                      onChange: async (e) => {
+                        await DataStore.save(
+                          Todo.copyOf(item, (updated) => {
+                            updated.completed = (e.target as any).checked;
+                          })
+                        );
+                      },
                     },
                   },
                 })}
