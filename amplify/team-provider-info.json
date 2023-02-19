@@ -23,6 +23,9 @@
       },
       "auth": {
         "todoapp": {}
+      },
+      "storage": {
+        "s3todoimages": {}
       }
     }
   }

@@ -15,6 +15,7 @@ type EagerTodo = {
   readonly name: string;
   readonly description?: string | null;
   readonly completed?: boolean | null;
+  readonly image?: string | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -28,6 +29,7 @@ type LazyTodo = {
   readonly name: string;
   readonly description?: string | null;
   readonly completed?: boolean | null;
+  readonly image?: string | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }

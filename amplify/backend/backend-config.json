@@ -90,5 +90,12 @@
         }
       ]
     }
+  },
+  "storage": {
+    "s3todoimages": {
+      "dependsOn": [],
+      "providerPlugin": "awscloudformation",
+      "service": "S3"
+    }
   }
 }
