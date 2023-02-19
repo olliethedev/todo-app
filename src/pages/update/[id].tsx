@@ -87,6 +87,7 @@ const ImageLayout = ({ id }: { id: string }) => {
       setTodo(todo);
     };
     call();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const onSuccess = useCallback(
@@ -133,7 +134,6 @@ const ImageLayout = ({ id }: { id: string }) => {
 };
 
 const S3Image = ({ imageKey }: { imageKey: string }) => {
-  console.log("imageKey", imageKey);
   const [url, setUrl] = useState<string>();
   useEffect(() => {
     const call = async () => {
