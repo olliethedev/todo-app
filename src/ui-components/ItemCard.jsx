@@ -87,9 +87,6 @@ export default function ItemCard(props) {
           onChange={() => {
             checkboxFieldOnChange();
           }}
-          onChange={(event) => {
-            setCheckboxFieldChecked(event.target.checked);
-          }}
           {...getOverrideProps(overrides, "CheckboxField")}
         ></CheckboxField>
         <Flex
