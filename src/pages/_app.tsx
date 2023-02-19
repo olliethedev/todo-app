@@ -6,6 +6,7 @@ import { Amplify, AuthModeStrategyType } from "aws-amplify";
 import { ThemeProvider } from "@aws-amplify/ui-react";
 
 import awsExports from "../aws-exports";
+import { studioTheme } from "@/ui-components";
 Amplify.configure({
   ...awsExports,
   authModeStrategyType: AuthModeStrategyType.MULTI_AUTH,
@@ -13,7 +14,7 @@ Amplify.configure({
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <ThemeProvider>
+    <ThemeProvider theme={studioTheme}>
       <Component {...pageProps} />
     </ThemeProvider>
   );

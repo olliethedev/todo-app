@@ -87,6 +87,9 @@ export default function ItemCard(props) {
           onChange={() => {
             checkboxFieldOnChange();
           }}
+          onChange={(event) => {
+            setCheckboxFieldChecked(event.target.checked);
+          }}
           {...getOverrideProps(overrides, "CheckboxField")}
         ></CheckboxField>
         <Flex
@@ -125,6 +128,11 @@ export default function ItemCard(props) {
             position="relative"
             padding="0px 0px 0px 0px"
             whiteSpace="pre-wrap"
+            textDecoration={
+              todo?.completed && todo?.completed == true
+                ? "line-through"
+                : "none"
+            }
             children={todo?.name}
             {...getOverrideProps(overrides, "Name")}
           ></Text>
@@ -156,7 +164,7 @@ export default function ItemCard(props) {
           shrink="0"
           size="default"
           isDisabled={false}
-          variation="default"
+          variation="link"
           children="✕"
           onClick={() => {
             deleteButtonOnClick();

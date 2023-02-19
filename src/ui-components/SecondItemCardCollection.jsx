@@ -7,6 +7,7 @@
 /* eslint-disable */
 import * as React from "react";
 import { Todo } from "../models";
+import { SortDirection } from "@aws-amplify/datastore";
 import {
   getOverrideProps,
   useDataStoreBinding,
@@ -15,10 +16,12 @@ import ItemCard from "./SecondItemCard";
 import { Collection } from "@aws-amplify/ui-react";
 export default function ItemCardCollection(props) {
   const { items: itemsProp, overrideItems, overrides, ...rest } = props;
+  const itemsPagination = { sort: (s) => s.completed(SortDirection.ASCENDING) };
   const [items, setItems] = React.useState(undefined);
   const itemsDataStore = useDataStoreBinding({
     type: "collection",
     model: Todo,
+    pagination: itemsPagination,
   }).items;
   React.useEffect(() => {
     if (itemsProp !== undefined) {
@@ -29,12 +32,15 @@ export default function ItemCardCollection(props) {
   }, [itemsProp, itemsDataStore]);
   return (
     <Collection
-      type="list"
+      type="grid"
+      isSearchable={true}
       isPaginated={true}
       searchPlaceholder="Search..."
       itemsPerPage={6}
-      direction="column"
-      justifyContent="center"
+      templateColumns="1fr"
+      autoFlow="row"
+      alignItems="stretch"
+      justifyContent="stretch"
       items={items || []}
       {...getOverrideProps(overrides, "ItemCardCollection")}
       {...rest}

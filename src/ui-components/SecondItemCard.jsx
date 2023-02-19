@@ -11,20 +11,27 @@ import {
   getOverrideProps,
   useDataStoreDeleteAction,
   useDataStoreUpdateAction,
+  useStateMutationAction,
   useNavigateAction,
 } from "@aws-amplify/ui-react/internal";
 import { schema } from "../models/schema";
 import { Button, CheckboxField, Flex, Text } from "@aws-amplify/ui-react";
 export default function ItemCard(props) {
   const { todo, overrides, ...rest } = props;
+  const [checkboxFieldChecked, setCheckboxFieldChecked] =
+    useStateMutationAction(todo?.completed);
   const checkboxFieldOnChange = useDataStoreUpdateAction({
     fields: {
-      completed: !todo?.completed,
+      completed: checkboxFieldChecked,
     },
     id: todo?.id,
     model: Todo,
     schema: schema,
   });
+  React.useEffect(() => {
+    checkboxFieldOnChange();
+    console.log({ checkboxFieldOnChange: checkboxFieldChecked });
+  }, [checkboxFieldChecked]);
   const textContentOnClick = useNavigateAction({
     type: "url",
     url: `${"/update/"}${todo?.id}`,
@@ -68,10 +75,10 @@ export default function ItemCard(props) {
           size="large"
           isDisabled={false}
           labelPosition="end"
-          checked={todo?.completed}
-          value={todo?.completed}
-          onChange={() => {
-            checkboxFieldOnChange();
+          checked={checkboxFieldChecked}
+          value={checkboxFieldChecked}
+          onChange={(e) => {
+            setCheckboxFieldChecked(e.target.checked);
           }}
           {...getOverrideProps(overrides, "CheckboxField")}
         ></CheckboxField>
@@ -111,6 +118,9 @@ export default function ItemCard(props) {
             position="relative"
             padding="0px 0px 0px 0px"
             whiteSpace="pre-wrap"
+            textDecoration={
+              checkboxFieldChecked == true ? "line-through" : "none"
+            }
             children={todo?.name}
             {...getOverrideProps(overrides, "Name")}
           ></Text>

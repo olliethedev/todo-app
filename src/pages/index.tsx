@@ -1,4 +1,5 @@
-import { ItemCardCollection } from "@/ui-components";
+import { Todo } from "@/models";
+import { ItemCardCollection, PageContent } from "@/ui-components";
 import NavBar from "@/ui-components/NavBar";
 import { Authenticator, Flex } from "@aws-amplify/ui-react";
 import Head from "next/head";
@@ -29,7 +30,29 @@ const Page = () => {
           },
         }}
       />
-      <ItemCardCollection />
+      <PageContent
+        overrides={{
+          PageContent: {
+            width: "100%",
+            maxWidth: "1440px",
+            margin: "0 auto",
+            children: (
+              <ItemCardCollection
+                overrideItems={() => ({
+                  width: "100%",
+                  maxWidth: "500px",
+                  margin: "0 auto",
+                  overrides: {
+                    TextContent: {
+                      className: "card-text",
+                    },
+                  },
+                })}
+              />
+            ),
+          },
+        }}
+      />
     </Flex>
   );
 };
