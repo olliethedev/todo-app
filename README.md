@@ -2,14 +2,37 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Getting Started
 
-First, run the development server:
+First, setup the Amplify CLI:
+
+```bash
+npm install -g @aws-amplify/cli
+amplify configure
+```
+https://docs.amplify.aws/cli/start/install/
+
+Then create a new Amplify project:
+
+```bash
+amplify init
+```
+https://docs.amplify.aws/cli/start/workflows/#amplify-init
+
+Using the Amplify Studio link the Figma project to the Amplify project.
+https://docs.amplify.aws/console/uibuilder/figmatocode/
+
+Then pull the Amplify project:
+
+```bash
+amplify pull
+```
+This will create the /ui-components folder with the components generated from the Figma project.
+
+To run the development server:
 
 ```bash
 npm run dev
 # or
 yarn dev
-# or
-pnpm dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
