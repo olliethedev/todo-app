@@ -499,7 +499,7 @@ export default createTheme({
         borderStyle: { value: "solid" },
         borderColor: { value: "{colors.transparent.value}" },
         borderWidth: { value: "{borderWidths.small.value}" },
-        borderRadius: { value: "{radii.xxxl.value}" },
+        borderRadius: { value: "{radii.large.value}" },
         color: { value: "{colors.font.primary.value}" },
         paddingBlockStart: { value: "{space.xs.value}" },
         paddingBlockEnd: { value: "{space.xs.value}" },
@@ -535,7 +535,7 @@ export default createTheme({
           borderInlineStart: { value: "none" },
           borderInlineEnd: { value: "none" },
           borderBlockStart: { value: "none" },
-          borderRadius: { value: "{radii.xxxl.value}" },
+          borderRadius: { value: "{radii.large.value}" },
           _focus: {
             borderBlockEndColor: { value: "{colors.border.focus.value}" },
             boxShadow: {

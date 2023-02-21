@@ -16,6 +16,9 @@ body{
 .amplify-input{
   background-color: var(--amplify-colors-background-secondary)!important;
 }
+.amplify-textarea{
+  background-color: var(--amplify-colors-background-secondary)!important;
+}
 .amplify-field-group__outer-end{
   background-color: var(--amplify-colors-background-secondary)!important;
   border-top-right-radius: var(--amplify-components-fieldcontrol-border-radius)!important;
