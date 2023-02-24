@@ -17,7 +17,7 @@ amplify init
 ```
 https://docs.amplify.aws/cli/start/workflows/#amplify-init
 
-Using the Amplify Studio link the Figma project to the Amplify project.
+Using the Amplify Studio link the [Figma project](https://www.amplifyui.com/templates/todo) to the Amplify project.
 https://docs.amplify.aws/console/uibuilder/figmatocode/
 
 Then pull the Amplify project:
